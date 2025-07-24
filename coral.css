@@ -1,0 +1,21 @@
+.cabecalho, 
+ footer {
+background-color: #323b74;
+}
+
+.coral {
+ border-bottom: solid 3px #fff;
+ border-radius: 0 0 5px 5px;
+}
+
+.suvinil {
+ border: none;
+}
+
+.navbar {
+  background-color: #323b74;
+}
+
+.menu {
+  background-color: #323b74;
+}

@@ -1,0 +1,238 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.cabecalho {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  align-items: start;
+  height: 60px;
+  color: #fff;
+  background-color: #db5d18; /* Recomendo para evitar transparência */
+}
+
+h1 {
+  margin-left: 70px;
+}
+
+main {
+margin-top: 100px;
+margin-bottom: 100px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+hr {
+  border: 0.5px solid gray;
+  width: 100%;
+  opacity: 50%;
+}
+
+section div {
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  gap: 5px;
+  padding: 0 5px 0 5px;
+  align-content: center;
+}
+
+h2 {
+display: flex;
+font-size: 1.2em;
+justify-content: space-between;
+color: #db5d18;
+}
+
+.pigmentacoes {
+  color: #000;
+  font-size: 16px;
+}
+
+.botao {
+border: none;
+background: none;
+padding: 0;
+cursor: pointer;
+margin-left: 90%;
+color: #c20303;
+}
+
+footer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  justify-content: space-around;
+  align-items: center;
+  height: 60px;
+  padding-top: 5px;
+  background-color: #db5d18; /* Recomendo para evitar transparência */
+   box-shadow: 0 -2px 6px #000;
+}
+
+a {
+display: flex;
+flex-direction: column;
+text-align: center;
+gap: 5px;
+text-decoration: none;
+color: #fff;
+font-size: 20px;
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+.suvinil {
+  border-bottom: solid 3px #fff;
+  border-radius: 0 0 5px 5px;
+}
+
+.coral {
+ border: none;
+}
+
+a:hover {
+color: #000;
+}
+
+/* Estilo do fundo do modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo do conteúdo do modal */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  height: 350px;
+  width: 400px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-content button {
+  padding: 8px 15px;
+  margin-top: 10px;
+}
+
+.modal-close {
+  background-color: red;
+  margin-left: 100%;
+  margin-bottom: 20px;
+  color: white;
+  float: right;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/*Menu*/
+.navbar {
+  background-color: #db5d18;
+  height: 60px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: fixed;
+}
+
+#menu-icon,
+#menu-icon2{
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+#menu-icon2{
+  margin: 10px 0 0 20px;
+}
+
+.menu {
+  list-style: none;
+  display: none;
+  flex-direction: column;
+  background-color: #db5d18;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  width: 210px;
+  height: 100vh;
+  z-index: 999;
+  padding: 10px 0;
+  margin: 0;
+  border-top: none;
+  border-radius: 0 20px 20px 0;
+  box-shadow: 4px 4px 8px #000;
+}
+
+.menu.active {
+  display: flex;
+}
+
+.menu li {
+  padding: 10px 20px;
+}
+
+.menu li a {
+  color: white;
+  text-decoration: none;
+}
+
+/*.menu.active {
+  display: flex;
+}*/
+
+/* Estilo do fundo do modal */
+.modal-overlay2 {
+  display: none;
+  position: fixed;
+ top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+  justify-content: center;
+  align-items: center;
+}
