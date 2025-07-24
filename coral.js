@@ -3,17 +3,16 @@ const colorantesCoral = [
   { nome: "XY1", cor: "linear-gradient(to right, #f7e600, #fff6b0)" }, // YG → XY1
   { nome: "YE2", cor: "linear-gradient(to right, #F4C430, #FFD666)" }, // YM → YE2
   { nome: "YE1", cor: "linear-gradient(to right, #D4A017, #FFCC33)" }, // YI → YE1
-  { nome: "YE1", cor: "linear-gradient(to right, #F9A602, #FFD95E)" }, // YR → YE1
   { nome: "XR1", cor: "linear-gradient(to right, #C41E3A, #FF5C5C)" }, // RB → XR1
   { nome: "MA1", cor: "linear-gradient(to right, #8B2500, #FF7F50)" }, // RI → MA1
   { nome: "RE1", cor: "linear-gradient(to right, #b061b0, #e2bde2)" }, // PR → RE1
   { nome: "OR1", cor: "linear-gradient(to right, #5d6fad, #aab5e1)" }, // BO → OR1
-  { nome: "WH1", cor: "linear-gradient(to right, #3F48CC, #9FA8DA)" }, // BI → WH1
   { nome: "GR1", cor: "linear-gradient(to right, #2E8B57, #98FB98)" }, // GI → GR1
-  { nome: "YE2", cor: "linear-gradient(to right, #123524, #3A6B47)" }, // GO → YE2
   { nome: "WH1", cor: "linear-gradient(to right, #FFFFFF, #E0E0E0)" }, // WI → WH1
-  { nome: "BU1", cor: "linear-gradient(to right, #000000, #434343)" }, // CB → BU1
-  { nome: "UM1", cor: "linear-gradient(to right, #ca999d, #e6c1c3)" }  // RY → UM1
+  { nome: "BU1", cor: "linear-gradient(to right, #3F48CC, #9FA8DA)" }, 
+  { nome: "BU2", cor: "linear-gradient(to right, #3F48CC, #9FA8DA)" }, 
+  { nome: "UM1", cor: "linear-gradient(to right, #ca999d, #e6c1c3)" },  // RY → UM1
+  { nome: "NO1", cor: "linear-gradient(to right, #000000, #434343)" }  
 ];
 
 const icon = document.getElementById("menu-icon");
@@ -83,11 +82,11 @@ function abrirModal() {
   document.getElementById("meuModal").style.display = "flex";
   let legendaColorante = document.getElementById("titulo");
   
-  colorantesCoral.forEach((suvinil) => {
-    if (pigmento == suvinil.nome) {
+  colorantesCoral.forEach((coral) => {
+    if (pigmento == coral.nome) {
       legendaColorante.textContent = "Colorante: " + pigmento;
       
-      legendaColorante.style.background = suvinil.cor;
+      legendaColorante.style.background = coral.cor;
       legendaColorante.style.webkitBackgroundClip = "text";
       legendaColorante.style.webkitTextFillColor = "transparent";
       legendaColorante.style.fontWeight = "bold";
@@ -107,11 +106,14 @@ function colorir() {
     let pigmentacoes = id.querySelector(".pigmentacoes");
     let legendaColorante = id.querySelector("h2");
     
-    let primeiros2 = pigmentacoes.className.substring(0, 3);
+    let primeiros3 = pigmentacoes.className.substring(0, 3);
     
-    colorantesCoral.forEach((suvinil) => {
-      if (primeiros2 == suvinil.nome) {
-        legendaColorante.style.background = suvinil.cor;
+    
+    
+    colorantesCoral.forEach((coral) => {
+     
+      if (primeiros3 == coral.nome) {
+        legendaColorante.style.background = coral.cor;
         legendaColorante.style.webkitBackgroundClip = "text";
         legendaColorante.style.webkitTextFillColor = "transparent";
         legendaColorante.style.fontWeight = "bold";
@@ -127,43 +129,37 @@ function resultado() {
   
   const container = document.querySelectorAll('.colorante');
 
-/*  
-  listaDePigmentos = listaDePigmentos.filter(obj => {
-    obj.totalProducao > 0;
-  }
-  )
-  
-  let listaDePigmentos2 = listaDePigmentos.filter(obj => {
-    obj.totalProducao === 0;
-  }
-  )
-  
-  listaDePigmentos2.push(...listaDePigmentos2);
-  */
   
   listaDePigmentos.forEach((item) => {
     let formulacao = item.resultadoConvercao;
     
     let totalPigmentacao = item.totalProducao;
+
+    let totais = 0;
+
+    if(item.id === "NO1" || item.id === "UM1" || item.id === "XY1" || item.id === "YE1") {
+       totais = ((formulacao / 3.24675324675325) * totalPigmentacao) + 450;
+    }else{
+      totais = ((formulacao / 3.24675324675325) * totalPigmentacao) + 225;
+    }
     
-    let totais = ((formulacao / 6.49350649350649) * totalPigmentacao) + 400;
     
     container.forEach((id) => {
       let pigmentacoes = id.querySelector(".pigmentacoes");
       let resultado = id.querySelector('p');
       let legendaColorante = id.querySelector("h2");
       
-      let primeiros2 = pigmentacoes.className.substring(0, 2);
+      let primeiros3 = pigmentacoes.className.substring(0, 3);
       
-      colorantesCoral.forEach((suvinil) => {
-        if (primeiros2 == suvinil.nome) {
-          legendaColorante.style.background = suvinil.cor;
+      colorantesCoral.forEach((coral) => {
+        if (primeiros3 == coral.nome) {
+          legendaColorante.style.background = coral.cor;
           legendaColorante.style.webkitBackgroundClip = "text";
           legendaColorante.style.webkitTextFillColor = "transparent";
           legendaColorante.style.fontWeight = "bold";
           legendaColorante.style.webkitTextStroke = "0.5px black";
           
-          resultado.style.background = suvinil.cor;
+          resultado.style.background = coral.cor;
           resultado.style.webkitBackgroundClip = "text";
           resultado.style.webkitTextFillColor = "transparent";
           resultado.style.fontWeight = "bold";
@@ -172,7 +168,7 @@ function resultado() {
         }
       })
       
-      if (item.id == primeiros2) {
+      if (item.id == primeiros3) {
         pigmentacoes.textContent = "Produções: " + totalPigmentacao;
         resultado.textContent = "Ideal na máquina: " + totais;
         
@@ -191,20 +187,6 @@ function enviar() {
   let elementosDaPagina = { id: " ", totalProducao: "0", resultadoConvercao: "0" };
   let listaDePigmentos = JSON.parse(localStorage.getItem('@listaDePigmentos')) || [];
   
-  /*
-  listaDePigmentos = listaDePigmentos.filter(obj => {
-    obj.totalProducao > 0;
-  }
-  )
-  
-  let listaDePigmentos2 = listaDePigmentos.filter(obj => {
-    obj.totalProducao === 0;
-  }
-  )
-  
-  listaDePigmentos2.push(...listaDePigmentos2)
-  */
-  
   elementosDaPagina.id = pigmento;
   elementosDaPagina.resultadoConvercao = valor1;
   elementosDaPagina.totalProducao = valor2;
@@ -216,10 +198,10 @@ function enviar() {
   
   resultado();
   fecharModal();
-  colorantesCoral.forEach((suvinil) => {
-    if (pigmento == suvinil.nome) {
+  colorantesCoral.forEach((coral) => {
+    if (pigmento == coral.nome) {
       
-      showCustomToast("Fórmula do colorante " + suvinil.nome + " registrada com sucesso", suvinil.cor).style.webkitTextStroke = "0.5px black";
+      showCustomToast("Fórmula do colorante " + coral.nome + " registrada com sucesso", coral.cor).style.webkitTextStroke = "0.5px black";
       
     }
   })
