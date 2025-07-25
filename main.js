@@ -355,8 +355,6 @@ iconeExcluir.addEventListener("click", () => {
     setTimeout(() => {
       location.reload();
     }, 1000);
-  })
-});
 });
 
   colorir();
