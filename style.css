@@ -12,6 +12,7 @@ body {
 
 .cabecalho {
   display: flex;
+  justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
@@ -23,13 +24,22 @@ body {
   background-color: #db5d18; /* Recomendo para evitar transparência */
 }
 
+#botao-cabecalho {
+  display: none;
+  margin: 10px;
+}
+
+.legenda {
+  font-size: 20px;
+}
+
 h1 {
   margin-left: 70px;
 }
 
 main {
-margin-top: 100px;
-margin-bottom: 100px;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 section {
@@ -54,10 +64,10 @@ section div {
 }
 
 h2 {
-display: flex;
-font-size: 1.2em;
-justify-content: space-between;
-color: #db5d18;
+  display: flex;
+  font-size: 1.2em;
+  justify-content: space-between;
+  color: #db5d18;
 }
 
 .pigmentacoes {
@@ -65,13 +75,24 @@ color: #db5d18;
   font-size: 16px;
 }
 
+.colorante-botoes {
+  display: flex;
+}
+
+.escolha {
+  margin-left: 85%;
+  width: 15px;
+  height: 15px;
+  accent-color: #4caf50; /* muda a cor da marcação em navegadores modernos */
+}
+
 .botao {
-border: none;
-background: none;
-padding: 0;
-cursor: pointer;
-margin-left: 90%;
-color: #c20303;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  margin-left: 5%;
+  color: #c20303;
 }
 
 footer {
@@ -86,19 +107,19 @@ footer {
   height: 60px;
   padding-top: 5px;
   background-color: #db5d18; /* Recomendo para evitar transparência */
-   box-shadow: 0 -2px 6px #000;
+  box-shadow: 0 -2px 6px #000;
 }
 
 a {
-display: flex;
-flex-direction: column;
-text-align: center;
-gap: 5px;
-text-decoration: none;
-color: #fff;
-font-size: 20px;
-font-weight: bold;
-margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .suvinil {
@@ -107,18 +128,21 @@ margin-bottom: 5px;
 }
 
 .coral {
- border: none;
+  border: none;
 }
 
 a:hover {
-color: #000;
+  color: #000;
 }
 
 /* Estilo do fundo do modal */
 .modal-overlay {
   display: none;
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
   justify-content: center;
@@ -135,7 +159,7 @@ color: #000;
   border-radius: 12px;
   height: 350px;
   width: 400px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content label {
@@ -181,13 +205,13 @@ color: #000;
 }
 
 #menu-icon,
-#menu-icon2{
+#menu-icon2 {
   font-size: 24px;
   color: white;
   cursor: pointer;
 }
 
-#menu-icon2{
+#menu-icon2 {
   margin: 10px 0 0 20px;
 }
 
@@ -230,7 +254,10 @@ color: #000;
 .modal-overlay2 {
   display: none;
   position: fixed;
- top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 0;
   justify-content: center;
