@@ -358,6 +358,9 @@ iconeExcluir.addEventListener("click", () => {
   // 5. Atualiza legenda e recarrega
   legenda.textContent = novaLista.length;
 
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
 });
 
 
