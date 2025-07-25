@@ -220,65 +220,14 @@ function atualizarItem(lista, novoItem, chave = "id") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  colorantesCoral.forEach((coral) => {
+  colorir();
+  resultado();
+});
 
-    let containerPrincipal = document.querySelector(".caixa");
-  
-    const linha = document.createElement("hr");
-    const container = document.createElement("div");
-    const titulo = document.createElement("h2");
-    const span1 = document.createElement("span");
-    const i = document.createElement("i");
-    const i2 = document.createElement("i");
-    const span2 = document.createElement("span");
-    const span3 = document.createElement("span");
-    const span4 = document.createElement("span");
-    const input = document.createElement("input");
-    const p = document.createElement("p");
-    const button = document.createElement("button");
+const container = document.querySelectorAll(".colorante"); // seletor mais específico
 
-    span2.textContent = coral.nome;
-
-    input.type = "checkbox";
-    input.name = "check";
-    button.title = "Excluir";
-   
-  
-    container.className = "colorante";
-    span3.className =  `${coral.nome} pigmentacoes`;
-    span4.className =  "colorante-botoes";
-    i.className = "fa-solid fa-fill-drip";
-    i2.className = "fa-solid fa-trash-can-arrow-up fa-lg";
-    button.className = "botao";
-    input.className = "escolha"
-    
-
-
-    container.id =  coral.nome;
-  
-    containerPrincipal.appendChild(linha);
-    containerPrincipal.appendChild(container);
-    container.appendChild(titulo);
-    titulo.appendChild(span1);
-    titulo.appendChild(span3);
-    span1.appendChild(i);
-    span1.appendChild(span2);
-    container.appendChild(p);
-    container.appendChild(span4);
-    span4.appendChild(input);
-    span4.appendChild(button);
-    button.appendChild(i2);
-
-
-    containerPrincipal.appendChild(linha);
-  
-    })
-
-    const container = document.querySelectorAll('.colorante'); // seletor mais específico
-
-
-container.forEach(item => {
-  item.addEventListener('click', event => {
+container.forEach((item) => {
+  item.addEventListener("click", (event) => {
     event.stopPropagation();
     pigmento = event.currentTarget.id;
     abrirModal(); // apenas se existir
@@ -287,27 +236,29 @@ container.forEach(item => {
 
 let icone = document.querySelectorAll(".botao");
 
-icone.forEach(item => {
-  
+icone.forEach((item) => {
   item.addEventListener("click", (event) => {
     event.stopPropagation();
-    
+
     let idDoPai = event.currentTarget;
-    
+
     let idPigmento = idDoPai.closest("div");
-    
-    let listaDePigmentos = JSON.parse(localStorage.getItem('@listaDePigmentos')) || [];
-    
-    listaDePigmentos = listaDePigmentos.filter(obj => obj.id !== idPigmento.id);
-    
-    localStorage.setItem('@listaDePigmentos', JSON.stringify(listaDePigmentos));
-    
+
+    let listaDePigmentos =
+      JSON.parse(localStorage.getItem("@listaDePigmentos")) || [];
+
+    listaDePigmentos = listaDePigmentos.filter(
+      (obj) => obj.id !== idPigmento.id
+    );
+
+    localStorage.setItem("@listaDePigmentos", JSON.stringify(listaDePigmentos));
+
     showWarning("Excluindo registro!");
-    
+
     setTimeout(() => {
       location.reload();
     }, 1000);
-  })
+  });
 });
 
 const checkboxes = document.querySelectorAll(".escolha");
@@ -358,9 +309,9 @@ iconeExcluir.addEventListener("click", () => {
   // 5. Atualiza legenda e recarrega
   legenda.textContent = novaLista.length;
 
-});
+  showWarning("Excluindo registros!");
 
-
-  colorir();
-  resultado();
+  setTimeout(() => {
+    location.reload();
+  }, 1000);
 });
