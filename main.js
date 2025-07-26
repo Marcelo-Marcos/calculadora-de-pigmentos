@@ -47,7 +47,7 @@ function showToast(message, type = "info", customColor = null) {
 
   Toastify({
     text: message,
-    duration: 4000,
+    duration: 2000,
     gravity: "top",
     position: "right",
     stopOnFocus: true,
@@ -125,7 +125,7 @@ function resultado() {
 
   const container = document.querySelectorAll(".colorante");
 
- 
+
   listaDePigmentos.forEach((item) => {
     let formulacao = item.resultadoConvercao;
 
@@ -186,12 +186,19 @@ function enviar() {
 
   resultado();
   fecharModal();
+  
+  setTimeout(() => {
+  location.reload();
+}, 2000);
+
   colorantesSuvinil.forEach((suvinil) => {
     if (pigmento == suvinil.nome) {
       showCustomToast(
         "Fórmula do colorante " + suvinil.nome + " registrada com sucesso",
         suvinil.cor
       ).style.webkitTextStroke = "0.5px black";
+      
+      
     }
   });
 }
@@ -211,11 +218,29 @@ function atualizarItem(lista, novoItem, chave = "id") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-
-  colorantesSuvinil.forEach((suvinil) => {
-
-    let containerPrincipal = document.querySelector(".caixa");
   
+  let listaDePigmentos =
+    JSON.parse(localStorage.getItem("@listaDePigmentos"));
+    
+    let valor = listaDePigmentos.length;
+    
+    if(valor > 0)
+    {
+    
+    
+    
+    console.log(listaDePigmentos)
+    
+    const diferentes = colorantesSuvinil.filter(colorante =>
+  !listaDePigmentos.some(pigmento => pigmento.id === colorante.nome)
+);
+    
+    console.log(diferentes)
+    
+    listaDePigmentos.forEach((idLocal) => {
+      
+      let containerPrincipal = document.querySelector(".caixa");
+
     const linha = document.createElement("hr");
     const container = document.createElement("div");
     const titulo = document.createElement("h2");
@@ -229,25 +254,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const p = document.createElement("p");
     const button = document.createElement("button");
 
-    span2.textContent = suvinil.nome;
+    span2.textContent = idLocal.id;
 
     input.type = "checkbox";
     input.name = "checks";
     button.title = "Excluir";
-   
-  
+
+
     container.className = "colorante";
-    span3.className =  `${suvinil.nome} pigmentacoes`;
+    span3.className =  `${idLocal.id} pigmentacoes`;
     span4.className =  "colorante-botoes";
     i.className = "fa-solid fa-fill-drip";
     i2.className = "fa-solid fa-trash-can-arrow-up fa-lg";
     button.className = "botao";
     input.className = "escolha"
-    
 
 
-    container.id =  suvinil.nome;
-  
+
+    container.id =  idLocal.id;
+
     containerPrincipal.appendChild(linha);
     containerPrincipal.appendChild(container);
     container.appendChild(titulo);
@@ -262,9 +287,123 @@ document.addEventListener("DOMContentLoaded", () => {
     button.appendChild(i2);
 
     containerPrincipal.appendChild(linha);
-  
-    })
 
+      
+    })
+    
+    
+    
+    
+    //Aqui
+    
+    diferentes.forEach((idSuvinil) => {
+  
+  let containerPrincipal = document.querySelector(".caixa");
+  
+  const linha = document.createElement("hr");
+  const container = document.createElement("div");
+  const titulo = document.createElement("h2");
+  const span1 = document.createElement("span");
+  const i = document.createElement("i");
+  const i2 = document.createElement("i");
+  const span2 = document.createElement("span");
+  const span3 = document.createElement("span");
+  const span4 = document.createElement("span");
+  const input = document.createElement("input");
+  const p = document.createElement("p");
+  const button = document.createElement("button");
+  
+  span2.textContent = idSuvinil.nome;
+  
+  input.type = "checkbox";
+  input.name = "checks";
+  button.title = "Excluir";
+  
+  
+  container.className = "colorante";
+  span3.className = `${idSuvinil.nome} pigmentacoes`;
+  span4.className = "colorante-botoes";
+  i.className = "fa-solid fa-fill-drip";
+  i2.className = "fa-solid fa-trash-can-arrow-up fa-lg";
+  button.className = "botao";
+  input.className = "escolha"
+  
+  
+  
+  container.id = idSuvinil.nome;
+  
+  containerPrincipal.appendChild(linha);
+  containerPrincipal.appendChild(container);
+  container.appendChild(titulo);
+  titulo.appendChild(span1);
+  titulo.appendChild(span3);
+  span1.appendChild(i);
+  span1.appendChild(span2);
+  container.appendChild(p);
+  container.appendChild(span4);
+  span4.appendChild(input);
+  span4.appendChild(button);
+  button.appendChild(i2);
+  
+  containerPrincipal.appendChild(linha);
+  
+})
+      
+    } if (valor === 0) {
+  
+  colorantesSuvinil.forEach((idSuvinil) => {
+
+    let containerPrincipal = document.querySelector(".caixa");
+
+    const linha = document.createElement("hr");
+    const container = document.createElement("div");
+    const titulo = document.createElement("h2");
+    const span1 = document.createElement("span");
+    const i = document.createElement("i");
+    const i2 = document.createElement("i");
+    const span2 = document.createElement("span");
+    const span3 = document.createElement("span");
+    const span4 = document.createElement("span");
+    const input = document.createElement("input");
+    const p = document.createElement("p");
+    const button = document.createElement("button");
+
+    span2.textContent = idSuvinil.nome;
+
+    input.type = "checkbox";
+    input.name = "checks";
+    button.title = "Excluir";
+
+
+    container.className = "colorante";
+    span3.className =  `${idSuvinil.nome} pigmentacoes`;
+    span4.className =  "colorante-botoes";
+    i.className = "fa-solid fa-fill-drip";
+    i2.className = "fa-solid fa-trash-can-arrow-up fa-lg";
+    button.className = "botao";
+    input.className = "escolha"
+
+
+
+    container.id =  idSuvinil.nome;
+
+    containerPrincipal.appendChild(linha);
+    containerPrincipal.appendChild(container);
+    container.appendChild(titulo);
+    titulo.appendChild(span1);
+    titulo.appendChild(span3);
+    span1.appendChild(i);
+    span1.appendChild(span2);
+    container.appendChild(p);
+    container.appendChild(span4);
+    span4.appendChild(input);
+    span4.appendChild(button);
+    button.appendChild(i2);
+
+    containerPrincipal.appendChild(linha);
+
+    })
+}
 
     const container = document.querySelectorAll('.colorante'); // seletor mais específico
 
@@ -280,22 +419,22 @@ container.forEach(item => {
 let icone = document.querySelectorAll(".botao");
 
 icone.forEach(item => {
-  
+
   item.addEventListener("click", (event) => {
     event.stopPropagation();
-    
+
     let idDoPai = event.currentTarget;
-    
+
     let idPigmento = idDoPai.closest("div");
-    
+
     let listaDePigmentos = JSON.parse(localStorage.getItem('@listaDePigmentos')) || [];
-    
+
     listaDePigmentos = listaDePigmentos.filter(obj => obj.id !== idPigmento.id);
-    
+
     localStorage.setItem('@listaDePigmentos', JSON.stringify(listaDePigmentos));
-    
+
     showWarning("Excluindo registro!");
-    
+
     setTimeout(() => {
       location.reload();
     }, 1000);
