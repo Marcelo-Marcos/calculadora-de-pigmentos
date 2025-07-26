@@ -222,14 +222,16 @@ document.addEventListener("DOMContentLoaded", () => {
   let listaDePigmentos =
     JSON.parse(localStorage.getItem("@listaDePigmentos"));
     
-    let valor = listaDePigmentos.length;
+    let valor = 0;
+
+    try {
+      valor = listaDePigmentos.length;
+    } catch (error) {
+      valor = 0;
+    }
     
     if(valor > 0)
     {
-    
-    
-    
-    console.log(listaDePigmentos)
     
     const diferentes = colorantesSuvinil.filter(colorante =>
   !listaDePigmentos.some(pigmento => pigmento.id === colorante.nome)

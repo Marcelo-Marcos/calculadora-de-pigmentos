@@ -120,7 +120,7 @@ function colorir() {
 
 function resultado() {
   let listaDePigmentos =
-    JSON.parse(localStorage.getItem("@listaDePigmentos")) || [];
+    JSON.parse(localStorage.getItem("@listaDePigmentosCoral")) || [];
 
   const container = document.querySelectorAll(".colorante");
 
@@ -183,7 +183,7 @@ function enviar() {
     resultadoConvercao: "0",
   };
   let listaDePigmentos =
-    JSON.parse(localStorage.getItem("@listaDePigmentos")) || [];
+    JSON.parse(localStorage.getItem("@listaDePigmentosCoral")) || [];
 
   elementosDaPagina.id = pigmento;
   elementosDaPagina.resultadoConvercao = valor1;
@@ -191,7 +191,7 @@ function enviar() {
 
   listaDePigmentos = atualizarItem(listaDePigmentos, elementosDaPagina);
 
-  localStorage.setItem("@listaDePigmentos", JSON.stringify(listaDePigmentos));
+  localStorage.setItem("@listaDePigmentosCoral", JSON.stringify(listaDePigmentos));
 
   resultado();
   fecharModal();
@@ -228,16 +228,20 @@ function atualizarItem(lista, novoItem, chave = "id") {
 document.addEventListener("DOMContentLoaded", () => {
   
   let listaDePigmentos =
-    JSON.parse(localStorage.getItem("@listaDePigmentos"));
+    JSON.parse(localStorage.getItem("@listaDePigmentosCoral"));
     
-    let valor = listaDePigmentos.length;
+    let valor = 0;
+
+    try {
+      valor = listaDePigmentos.length;
+    } catch (error) {
+      valor = 0;
+    }
     
+    console.log(valor);
+
     if(valor > 0)
     {
-    
-    
-    
-    console.log(listaDePigmentos)
     
     const diferentes = colorantesCoral.filter(colorante =>
   !listaDePigmentos.some(pigmento => pigmento.id === colorante.nome)
@@ -435,11 +439,11 @@ icone.forEach(item => {
 
     let idPigmento = idDoPai.closest("div");
 
-    let listaDePigmentos = JSON.parse(localStorage.getItem('@listaDePigmentos')) || [];
+    let listaDePigmentos = JSON.parse(localStorage.getItem('@listaDePigmentosCoral')) || [];
 
     listaDePigmentos = listaDePigmentos.filter(obj => obj.id !== idPigmento.id);
 
-    localStorage.setItem('@listaDePigmentos', JSON.stringify(listaDePigmentos));
+    localStorage.setItem('@listaDePigmentosCoral', JSON.stringify(listaDePigmentos));
 
     showWarning("Excluindo registro!");
 
@@ -484,7 +488,7 @@ iconeExcluir.addEventListener("click", () => {
 
   // 2. Pega a lista atual do localStorage
   const listaAtual =
-    JSON.parse(localStorage.getItem("@listaDePigmentos")) || [];
+    JSON.parse(localStorage.getItem("@listaDePigmentosCoral")) || [];
 
   // 3. Filtra removendo os IDs marcados
   const novaLista = listaAtual.filter(
@@ -492,7 +496,7 @@ iconeExcluir.addEventListener("click", () => {
   );
 
   // 4. Atualiza o localStorage
-  localStorage.setItem("@listaDePigmentos", JSON.stringify(novaLista));
+  localStorage.setItem("@listaDePigmentosCoral", JSON.stringify(novaLista));
 
   // 5. Atualiza legenda e recarrega
   legenda.textContent = novaLista.length;
