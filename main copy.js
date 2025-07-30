@@ -47,7 +47,7 @@ function showToast(message, type = "info", customColor = null) {
 
   Toastify({
     text: message,
-    duration: 4000,
+    duration: 2000,
     gravity: "top",
     position: "right",
     stopOnFocus: true,
@@ -125,19 +125,6 @@ function resultado() {
 
   const container = document.querySelectorAll(".colorante");
 
-  /*  
-  listaDePigmentos = listaDePigmentos.filter(obj => {
-    obj.totalProducao > 0;
-  }
-  )
-  
-  let listaDePigmentos2 = listaDePigmentos.filter(obj => {
-    obj.totalProducao === 0;
-  }
-  )
-  
-  listaDePigmentos2.push(...listaDePigmentos2);
-  */
 
   listaDePigmentos.forEach((item) => {
     let formulacao = item.resultadoConvercao;
@@ -189,20 +176,6 @@ function enviar() {
   let listaDePigmentos =
     JSON.parse(localStorage.getItem("@listaDePigmentos")) || [];
 
-  /*
-  listaDePigmentos = listaDePigmentos.filter(obj => {
-    obj.totalProducao > 0;
-  }
-  )
-  
-  let listaDePigmentos2 = listaDePigmentos.filter(obj => {
-    obj.totalProducao === 0;
-  }
-  )
-  
-  listaDePigmentos2.push(...listaDePigmentos2)
-  */
-
   elementosDaPagina.id = pigmento;
   elementosDaPagina.resultadoConvercao = valor1;
   elementosDaPagina.totalProducao = valor2;
@@ -213,12 +186,19 @@ function enviar() {
 
   resultado();
   fecharModal();
+
+  setTimeout(() => {
+    location.reload();
+  }, 2000);
+
   colorantesSuvinil.forEach((suvinil) => {
     if (pigmento == suvinil.nome) {
       showCustomToast(
         "Fórmula do colorante " + suvinil.nome + " registrada com sucesso",
         suvinil.cor
       ).style.webkitTextStroke = "0.5px black";
+
+
     }
   });
 }
@@ -238,38 +218,277 @@ function atualizarItem(lista, novoItem, chave = "id") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  colorir();
-  resultado();
-});
 
-const container = document.querySelectorAll(".colorante"); // seletor mais específico
+  let listaDePigmentos =
+    JSON.parse(localStorage.getItem("@listaDePigmentos"));
 
-container.forEach((item) => {
-  item.addEventListener("click", (event) => {
-    event.stopPropagation();
-    pigmento = event.currentTarget.id;
-    abrirModal(); // apenas se existir
-  });
-});
+  let valor = 0;
 
-let icone = document.querySelectorAll(".botao");
+  try {
+    valor = listaDePigmentos.length;
+  } catch (error) {
+    valor = 0;
+  }
 
-icone.forEach((item) => {
-  item.addEventListener("click", (event) => {
-    event.stopPropagation();
+  if (valor > 0) {
 
-    let idDoPai = event.currentTarget;
-
-    let idPigmento = idDoPai.closest("div");
-
-    let listaDePigmentos =
-      JSON.parse(localStorage.getItem("@listaDePigmentos")) || [];
-
-    listaDePigmentos = listaDePigmentos.filter(
-      (obj) => obj.id !== idPigmento.id
+    const diferentes = colorantesSuvinil.filter(colorante =>
+      !listaDePigmentos.some(pigmento => pigmento.id === colorante.nome)
     );
 
-    localStorage.setItem("@listaDePigmentos", JSON.stringify(listaDePigmentos));
+    console.log(diferentes)
+
+    listaDePigmentos.forEach((idLocal) => {
+
+      let containerPrincipal = document.querySelector(".caixa");
+
+      const linha = document.createElement("hr");
+      const container = document.createElement("div");
+      const titulo = document.createElement("h2");
+      const span1 = document.createElement("span");
+      const i = document.createElement("i");
+      const i2 = document.createElement("i");
+      const span2 = document.createElement("span");
+      const span3 = document.createElement("span");
+      const span4 = document.createElement("span");
+      const input = document.createElement("input");
+      const p = document.createElement("p");
+      const button = document.createElement("button");
+
+      span2.textContent = idLocal.id;
+
+      input.type = "checkbox";
+      input.name = "checks";
+      button.title = "Excluir";
+
+
+      container.className = "colorante";
+      span3.className = `${idLocal.id} pigmentacoes`;
+      span4.className = "colorante-botoes";
+      i.className = "fa-solid fa-fill-drip";
+      i2.className = "fa-solid fa-trash-can-arrow-up fa-lg";
+      button.className = "botao";
+      input.className = "escolha"
+
+
+
+      container.id = idLocal.id;
+
+      containerPrincipal.appendChild(linha);
+      containerPrincipal.appendChild(container);
+      container.appendChild(titulo);
+      titulo.appendChild(span1);
+      titulo.appendChild(span3);
+      span1.appendChild(i);
+      span1.appendChild(span2);
+      container.appendChild(p);
+      container.appendChild(span4);
+      span4.appendChild(input);
+      span4.appendChild(button);
+      button.appendChild(i2);
+
+      containerPrincipal.appendChild(linha);
+
+
+    })
+
+
+
+
+    //Aqui
+
+    diferentes.forEach((idSuvinil) => {
+
+      let containerPrincipal = document.querySelector(".caixa");
+
+      const linha = document.createElement("hr");
+      const container = document.createElement("div");
+      const titulo = document.createElement("h2");
+      const span1 = document.createElement("span");
+      const i = document.createElement("i");
+      const i2 = document.createElement("i");
+      const span2 = document.createElement("span");
+      const span3 = document.createElement("span");
+      const span4 = document.createElement("span");
+      const input = document.createElement("input");
+      const p = document.createElement("p");
+      const button = document.createElement("button");
+
+      span2.textContent = idSuvinil.nome;
+
+      input.type = "checkbox";
+      input.name = "checks";
+      button.title = "Excluir";
+
+
+      container.className = "colorante";
+      span3.className = `${idSuvinil.nome} pigmentacoes`;
+      span4.className = "colorante-botoes";
+      i.className = "fa-solid fa-fill-drip";
+      i2.className = "fa-solid fa-trash-can-arrow-up fa-lg";
+      button.className = "botao";
+      input.className = "escolha"
+
+
+
+      container.id = idSuvinil.nome;
+
+      containerPrincipal.appendChild(linha);
+      containerPrincipal.appendChild(container);
+      container.appendChild(titulo);
+      titulo.appendChild(span1);
+      titulo.appendChild(span3);
+      span1.appendChild(i);
+      span1.appendChild(span2);
+      container.appendChild(p);
+      container.appendChild(span4);
+      span4.appendChild(input);
+      span4.appendChild(button);
+      button.appendChild(i2);
+
+      containerPrincipal.appendChild(linha);
+
+    })
+
+  } if (valor === 0) {
+
+    colorantesSuvinil.forEach((idSuvinil) => {
+
+      let containerPrincipal = document.querySelector(".caixa");
+
+      const linha = document.createElement("hr");
+      const container = document.createElement("div");
+      const titulo = document.createElement("h2");
+      const span1 = document.createElement("span");
+      const i = document.createElement("i");
+      const i2 = document.createElement("i");
+      const span2 = document.createElement("span");
+      const span3 = document.createElement("span");
+      const span4 = document.createElement("span");
+      const input = document.createElement("input");
+      const p = document.createElement("p");
+      const button = document.createElement("button");
+
+      span2.textContent = idSuvinil.nome;
+
+      input.type = "checkbox";
+      input.name = "checks";
+      button.title = "Excluir";
+
+
+      container.className = "colorante";
+      span3.className = `${idSuvinil.nome} pigmentacoes`;
+      span4.className = "colorante-botoes";
+      i.className = "fa-solid fa-fill-drip";
+      i2.className = "fa-solid fa-trash-can-arrow-up fa-lg";
+      button.className = "botao";
+      input.className = "escolha"
+
+
+
+      container.id = idSuvinil.nome;
+
+      containerPrincipal.appendChild(linha);
+      containerPrincipal.appendChild(container);
+      container.appendChild(titulo);
+      titulo.appendChild(span1);
+      titulo.appendChild(span3);
+      span1.appendChild(i);
+      span1.appendChild(span2);
+      container.appendChild(p);
+      container.appendChild(span4);
+      span4.appendChild(input);
+      span4.appendChild(button);
+      button.appendChild(i2);
+
+      containerPrincipal.appendChild(linha);
+
+    })
+  }
+
+  const container = document.querySelectorAll('.colorante'); // seletor mais específico
+
+
+  container.forEach(item => {
+    item.addEventListener('click', event => {
+      event.stopPropagation();
+      pigmento = event.currentTarget.id;
+      abrirModal(); // apenas se existir
+    });
+  });
+
+  let icone = document.querySelectorAll(".botao");
+
+  icone.forEach(item => {
+
+    item.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      let idDoPai = event.currentTarget;
+
+      let idPigmento = idDoPai.closest("div");
+
+      let listaDePigmentos = JSON.parse(localStorage.getItem('@listaDePigmentos')) || [];
+
+      listaDePigmentos = listaDePigmentos.filter(obj => obj.id !== idPigmento.id);
+
+      localStorage.setItem('@listaDePigmentos', JSON.stringify(listaDePigmentos));
+
+      showWarning("Excluindo registro!");
+
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    })
+  });
+
+  const checkboxes = document.querySelectorAll(".escolha");
+  const legenda = document.querySelector(".legenda");
+  const iconeExcluir = document.getElementById("botao-cabecalho");
+
+  // Exibe ou oculta o botão conforme houver algum marcado
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      // Se pelo menos um estiver marcado, mostra o botão
+      const algumMarcado = Array.from(checkboxes).some((cb) => cb.checked);
+      iconeExcluir.style.display = algumMarcado ? "block" : "none";
+
+      // Verifica se há algum marcado
+      const checkboxesMarcados = Array.from(checkboxes).filter(
+        (cb) => cb.checked
+      );
+      const algumMarcado2 = checkboxesMarcados.length > 0;
+
+      // Mostra ou esconde o botão de exclusão
+      iconeExcluir.style.display = algumMarcado2 ? "block" : "none";
+
+      // Atualiza o número de itens marcados na legenda
+      legenda.textContent = checkboxesMarcados.length;
+    });
+  });
+
+  iconeExcluir.addEventListener("click", () => {
+    // 1. Pega os IDs dos pais dos checkboxes marcados
+    const idsParaExcluir = Array.from(checkboxes)
+      .filter((cb) => cb.checked)
+      .map((cb) => cb.closest("div").id);
+
+    // 2. Pega a lista atual do localStorage
+    const listaAtual =
+      JSON.parse(localStorage.getItem("@listaDePigmentos")) || [];
+
+    // 3. Filtra removendo os IDs marcados
+    const novaLista = listaAtual.filter(
+      (pigmento) => !idsParaExcluir.includes(pigmento.id)
+    );
+
+    // 4. Atualiza o localStorage
+    localStorage.setItem("@listaDePigmentos", JSON.stringify(novaLista));
+
+    // 5. Atualiza legenda e recarrega
+    legenda.textContent = novaLista.length;
 
     showWarning("Excluindo registro!");
 
@@ -277,59 +496,7 @@ icone.forEach((item) => {
       location.reload();
     }, 1000);
   });
-});
 
-const checkboxes = document.querySelectorAll(".escolha");
-const legenda = document.querySelector(".legenda");
-const iconeExcluir = document.getElementById("botao-cabecalho");
-
-// Exibe ou oculta o botão conforme houver algum marcado
-checkboxes.forEach((checkbox) => {
-  checkbox.addEventListener("click", (event) => {
-    event.stopPropagation();
-
-    // Se pelo menos um estiver marcado, mostra o botão
-    const algumMarcado = Array.from(checkboxes).some((cb) => cb.checked);
-    iconeExcluir.style.display = algumMarcado ? "block" : "none";
-
-    // Verifica se há algum marcado
-    const checkboxesMarcados = Array.from(checkboxes).filter(
-      (cb) => cb.checked
-    );
-    const algumMarcado2 = checkboxesMarcados.length > 0;
-
-    // Mostra ou esconde o botão de exclusão
-    iconeExcluir.style.display = algumMarcado2 ? "block" : "none";
-
-    // Atualiza o número de itens marcados na legenda
-    legenda.textContent = checkboxesMarcados.length;
-  });
-});
-
-iconeExcluir.addEventListener("click", () => {
-  // 1. Pega os IDs dos pais dos checkboxes marcados
-  const idsParaExcluir = Array.from(checkboxes)
-    .filter((cb) => cb.checked)
-    .map((cb) => cb.closest("div").id);
-
-  // 2. Pega a lista atual do localStorage
-  const listaAtual =
-    JSON.parse(localStorage.getItem("@listaDePigmentos")) || [];
-
-  // 3. Filtra removendo os IDs marcados
-  const novaLista = listaAtual.filter(
-    (pigmento) => !idsParaExcluir.includes(pigmento.id)
-  );
-
-  // 4. Atualiza o localStorage
-  localStorage.setItem("@listaDePigmentos", JSON.stringify(novaLista));
-
-  // 5. Atualiza legenda e recarrega
-  legenda.textContent = novaLista.length;
-
-  showWarning("Excluindo registros!");
-
-  setTimeout(() => {
-    location.reload();
-  }, 1000);
+  colorir();
+  resultado();
 });

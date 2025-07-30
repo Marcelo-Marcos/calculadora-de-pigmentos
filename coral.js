@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     listaDePigmentos.forEach((idLocal) => {
       
-      let containerPrincipal = document.querySelector(".caixa");
+    let containerPrincipal = document.querySelector(".caixa");
 
     const linha = document.createElement("hr");
     const container = document.createElement("div");
