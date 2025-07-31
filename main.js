@@ -219,11 +219,7 @@ function atualizarItem(lista, novoItem, chave = "id") {
 
 function construirPagina(construtor) {
 
-  let construindo = construtor;
-
-  construindo.forEach((idLocal) => {
-
-    let containerPrincipal = document.querySelector(".caixa");
+    const containerPrincipal = document.querySelector(".caixa");
 
     const linha = document.createElement("hr");
     const container = document.createElement("div");
@@ -238,7 +234,9 @@ function construirPagina(construtor) {
     const p = document.createElement("p");
     const button = document.createElement("button");
 
-    span2.textContent = idLocal.id;
+    const identificador = construtor.id || construtor.nome;
+
+    span2.textContent = identificador;
 
     input.type = "checkbox";
     input.name = "checks";
@@ -246,7 +244,7 @@ function construirPagina(construtor) {
 
 
     container.className = "colorante";
-    span3.className = `${idLocal.id} pigmentacoes`;
+    span3.className = `${identificador} pigmentacoes`;
     span4.className = "colorante-botoes";
     i.className = "fa-solid fa-fill-drip";
     i2.className = "fa-solid fa-trash-can-arrow-up fa-lg";
@@ -255,7 +253,7 @@ function construirPagina(construtor) {
 
 
 
-    container.id = idLocal.id;
+    container.id = identificador;
 
     containerPrincipal.appendChild(linha);
     containerPrincipal.appendChild(container);
@@ -272,143 +270,25 @@ function construirPagina(construtor) {
 
     containerPrincipal.appendChild(linha);
 
-
-  })
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
 
   let listaDePigmentos =
-    JSON.parse(localStorage.getItem("@listaDePigmentos"));
-
-  let valor = 0;
-
-  try {
-    valor = listaDePigmentos.length;
-  } catch (error) {
-    valor = 0;
-  }
-
-  if (valor > 0) {
-
-    const diferentes = colorantesSuvinil.filter(colorante =>
-      !listaDePigmentos.some(pigmento => pigmento.id === colorante.nome)
-    );
-
-    construirPagina(listaDePigmentos);
-
-    //Aqui
+    JSON.parse(localStorage.getItem("@listaDePigmentos")) || [];
 
 
-    diferentes.forEach((idSuvinil) => {
-
-      let containerPrincipal = document.querySelector(".caixa");
-
-      const linha = document.createElement("hr");
-      const container = document.createElement("div");
-      const titulo = document.createElement("h2");
-      const span1 = document.createElement("span");
-      const i = document.createElement("i");
-      const i2 = document.createElement("i");
-      const span2 = document.createElement("span");
-      const span3 = document.createElement("span");
-      const span4 = document.createElement("span");
-      const input = document.createElement("input");
-      const p = document.createElement("p");
-      const button = document.createElement("button");
-
-      span2.textContent = idSuvinil.nome;
-
-      input.type = "checkbox";
-      input.name = "checks";
-      button.title = "Excluir";
-
-
-      container.className = "colorante";
-      span3.className = `${idSuvinil.nome} pigmentacoes`;
-      span4.className = "colorante-botoes";
-      i.className = "fa-solid fa-fill-drip";
-      i2.className = "fa-solid fa-trash-can-arrow-up fa-lg";
-      button.className = "botao";
-      input.className = "escolha"
-
-
-
-      container.id = idSuvinil.nome;
-
-      containerPrincipal.appendChild(linha);
-      containerPrincipal.appendChild(container);
-      container.appendChild(titulo);
-      titulo.appendChild(span1);
-      titulo.appendChild(span3);
-      span1.appendChild(i);
-      span1.appendChild(span2);
-      container.appendChild(p);
-      container.appendChild(span4);
-      span4.appendChild(input);
-      span4.appendChild(button);
-      button.appendChild(i2);
-
-      containerPrincipal.appendChild(linha);
-
-    })
-
-  } if (valor === 0) {
-
-    colorantesSuvinil.forEach((idSuvinil) => {
-
-      let containerPrincipal = document.querySelector(".caixa");
-
-      const linha = document.createElement("hr");
-      const container = document.createElement("div");
-      const titulo = document.createElement("h2");
-      const span1 = document.createElement("span");
-      const i = document.createElement("i");
-      const i2 = document.createElement("i");
-      const span2 = document.createElement("span");
-      const span3 = document.createElement("span");
-      const span4 = document.createElement("span");
-      const input = document.createElement("input");
-      const p = document.createElement("p");
-      const button = document.createElement("button");
-
-      span2.textContent = idSuvinil.nome;
-
-      input.type = "checkbox";
-      input.name = "checks";
-      button.title = "Excluir";
-
-
-      container.className = "colorante";
-      span3.className = `${idSuvinil.nome} pigmentacoes`;
-      span4.className = "colorante-botoes";
-      i.className = "fa-solid fa-fill-drip";
-      i2.className = "fa-solid fa-trash-can-arrow-up fa-lg";
-      button.className = "botao";
-      input.className = "escolha"
-
-
-
-      container.id = idSuvinil.nome;
-
-      containerPrincipal.appendChild(linha);
-      containerPrincipal.appendChild(container);
-      container.appendChild(titulo);
-      titulo.appendChild(span1);
-      titulo.appendChild(span3);
-      span1.appendChild(i);
-      span1.appendChild(span2);
-      container.appendChild(p);
-      container.appendChild(span4);
-      span4.appendChild(input);
-      span4.appendChild(button);
-      button.appendChild(i2);
-
-      containerPrincipal.appendChild(linha);
-
-    })
-  }
+    if (listaDePigmentos.length > 0) {
+      const diferentes = colorantesSuvinil.filter(colorante =>
+        !listaDePigmentos.some(pigmento => pigmento.id === colorante.nome)
+      );
+      
+      listaDePigmentos.forEach(item => construirPagina(item));
+      diferentes.forEach(item => construirPagina(item));
+      
+    } else {
+      colorantesSuvinil.forEach(item => construirPagina(item));
+    }
 
   const container = document.querySelectorAll('.colorante'); // seletor mais específico
 
