@@ -16,6 +16,22 @@ const colorantesSuvinil = [
   { nome: "RY", cor: "linear-gradient(to right, #ca999d, #e6c1c3)" },
 ];
 
+const colorantesCoral = [
+  { nome: "XY1", cor: "linear-gradient(to right, #f7e600, #fff6b0)" }, // YG → XY1
+  { nome: "YE2", cor: "linear-gradient(to right, #F4C430, #FFD666)" }, // YM → YE2
+  { nome: "YE1", cor: "linear-gradient(to right, #D4A017, #FFCC33)" }, // YI → YE1
+  { nome: "XR1", cor: "linear-gradient(to right, #C41E3A, #FF5C5C)" }, // RB → XR1
+  { nome: "MA1", cor: "linear-gradient(to right, #8B2500, #FF7F50)" }, // RI → MA1
+  { nome: "RE1", cor: "linear-gradient(to right, #b061b0, #e2bde2)" }, // PR → RE1
+  { nome: "OR1", cor: "linear-gradient(to right, #5d6fad, #aab5e1)" }, // BO → OR1
+  { nome: "GR1", cor: "linear-gradient(to right, #2E8B57, #98FB98)" }, // GI → GR1
+  { nome: "WH1", cor: "linear-gradient(to right, #FFFFFF, #E0E0E0)" }, // WI → WH1
+  { nome: "BU1", cor: "linear-gradient(to right, #3F48CC, #9FA8DA)" },
+  { nome: "BU2", cor: "linear-gradient(to right, #3F48CC, #9FA8DA)" },
+  { nome: "UM1", cor: "linear-gradient(to right, #ca999d, #e6c1c3)" }, // RY → UM1
+  { nome: "NO1", cor: "linear-gradient(to right, #000000, #434343)" },
+];
+
 const icon = document.getElementById("menu-icon");
 const icon2 = document.getElementById("menu-icon2");
 const fundoModal = document.querySelector(".modal-overlay2");
@@ -273,6 +289,13 @@ function construirPagina(construtor) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const paginaAtiva = window.location.pathname;
+
+  console.log(paginaAtiva)
+
+
+if(paginaAtiva === "/index.html"){
+
 
   let listaDePigmentos =
     JSON.parse(localStorage.getItem("@listaDePigmentos")) || [];
@@ -289,6 +312,24 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       colorantesSuvinil.forEach(item => construirPagina(item));
     }
+  }else if(paginaAtiva === "/coral.html"){
+    let listaDePigmentos =
+    JSON.parse(localStorage.getItem("@listaDePigmentosCoral")) || [];
+
+
+    if (listaDePigmentos.length > 0) {
+      const diferentes = colorantesSuvinil.filter(colorante =>
+        !listaDePigmentos.some(pigmento => pigmento.id === colorante.nome)
+      );
+      
+      listaDePigmentos.forEach(item => construirPagina(item));
+      diferentes.forEach(item => construirPagina(item));
+      
+    } else {
+      colorantesCoral.forEach(item => construirPagina(item));
+    }
+  }
+
 
   const container = document.querySelectorAll('.colorante'); // seletor mais específico
 
