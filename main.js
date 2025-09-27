@@ -17,18 +17,18 @@ const colorantesSuvinil = [
 ];
 
 const colorantesCoral = [
-  { nome: "XY1", cor: "linear-gradient(to right, #f7e600, #fff6b0)" }, // YG → XY1
-  { nome: "YE2", cor: "linear-gradient(to right, #F4C430, #FFD666)" }, // YM → YE2
-  { nome: "YE1", cor: "linear-gradient(to right, #D4A017, #FFCC33)" }, // YI → YE1
-  { nome: "XR1", cor: "linear-gradient(to right, #C41E3A, #FF5C5C)" }, // RB → XR1
-  { nome: "MA1", cor: "linear-gradient(to right, #8B2500, #FF7F50)" }, // RI → MA1
-  { nome: "RE1", cor: "linear-gradient(to right, #b061b0, #e2bde2)" }, // PR → RE1
-  { nome: "OR1", cor: "linear-gradient(to right, #5d6fad, #aab5e1)" }, // BO → OR1
-  { nome: "GR1", cor: "linear-gradient(to right, #2E8B57, #98FB98)" }, // GI → GR1
-  { nome: "WH1", cor: "linear-gradient(to right, #FFFFFF, #E0E0E0)" }, // WI → WH1
+  { nome: "XY1", cor: "linear-gradient(to right, #f7e600, #fff6b0)" }, 
+  { nome: "YE2", cor: "linear-gradient(to right, #F4C430, #FFD666)" }, 
+  { nome: "YE1", cor: "linear-gradient(to right, #D4A017, #FFCC33)" }, 
+  { nome: "XR1", cor: "linear-gradient(to right, #C41E3A, #FF5C5C)" }, 
+  { nome: "MA1", cor: "linear-gradient(to right, #8B2500, #FF7F50)" }, 
+  { nome: "RE1", cor: "linear-gradient(to right, #b061b0, #e2bde2)" }, 
+  { nome: "OR1", cor: "linear-gradient(to right, #5d6fad, #aab5e1)" }, 
+  { nome: "GR1", cor: "linear-gradient(to right, #2E8B57, #98FB98)" }, 
+  { nome: "WH1", cor: "linear-gradient(to right, #FFFFFF, #E0E0E0)" }, 
   { nome: "BU1", cor: "linear-gradient(to right, #3F48CC, #9FA8DA)" },
   { nome: "BU2", cor: "linear-gradient(to right, #3F48CC, #9FA8DA)" },
-  { nome: "UM1", cor: "linear-gradient(to right, #ca999d, #e6c1c3)" }, // RY → UM1
+  { nome: "UM1", cor: "linear-gradient(to right, #ca999d, #e6c1c3)" }, 
   { nome: "NO1", cor: "linear-gradient(to right, #000000, #434343)" },
 ];
 
